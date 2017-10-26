@@ -1,5 +1,4 @@
 #!/bin/bash
-set -m # enable job control
 
 RPCPORT=8545
 WSPORT=8546
@@ -26,13 +25,13 @@ nohup geth \
   --keystore "${ROOT}/keys" \
   --password "${ROOT}/password.txt" \
   --unlock "${UNLOCK_ACCOUNT}" \
-  --verbosity 2 --mine \
+  --verbosity 3 --mine \
   --ws --wsapi eth,net,web3,personal --wsport $WSPORT \
   --rpc --rpcapi eth,net,web3,personal,miner --rpcaddr 0.0.0.0 --rpcport $RPCPORT \
-  --targetgaslimit 6500000 < /dev/null &
+  --targetgaslimit 6500000 < /dev/null > $ROOT/geth.log 2>&1 &
 eth_pid=$!
 
-tail -F nohup.out 2>/dev/null &
+tail -F $ROOT/geth.log 2>/dev/null &
 tail_pid=$!
 
 cleanup() {
@@ -72,7 +71,7 @@ if ! eth_running ; then
   RESULT=1
 else
   echo -e "\e[32mGeth up and running!\e[0m"
-  fg %1
+  wait
   RESULT=0
 fi
 
