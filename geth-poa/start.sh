@@ -27,6 +27,20 @@ while getopts p:r:a option ; do
   esac
 done
 
+# spin until node is ready
+function spinner {
+  local i sp n
+  sp='/-\|'
+  n=${#sp}
+  printf ' '
+  while sleep 0.1; do
+    printf "%s\b" "${sp:i++%n:1}"
+  done
+}
+
+spinner &
+spinner_pid=$!
+
 # geth is dumb and won't let us run it in the background, and nohup redirects to file when run in a script
 nohup geth \
   --datadir "${ROOT}/chain" \
@@ -39,32 +53,41 @@ nohup geth \
   --targetgaslimit 6500000 < /dev/null &
 eth_pid=$!
 
-tail -F nohup.out &
+tail -F nohup.out 2>/dev/null &
 tail_pid=$!
 
 # Just in case...
-trap "kill $tail_pid $eth_pid > /dev/null 2>&1" EXIT SIGINT
+trap "kill $spinner_pid $tail_pid $eth_pid > /dev/null 2>&1" EXIT
+trap "exit" SIGINT
 
 function eth_call {
-  curl  --silent --show-error localhost:$WSPORT -X POST -H "Content-Type: application/json" --data "$1" > /dev/null 2>&1
+  local response
+  response=$(curl  --silent --show-error localhost:$WSPORT -X POST -H "Content-Type: application/json" --data "${response}" 2>&1)
+  if [[ \
+    "${response}" == *'"error":'* || \
+    "${response}" == *'Connection refused'* || \
+    "${response}" == *"bad method"* \
+  ]] ; then
+    echo "not ready"
+  else
+    >&2 echo $response
+    echo "ready"
+  fi
 }
 
 function eth_running {
   kill -0 $eth_pid > /dev/null 2>&1
 }
 
-# spin until node is connectable
-while eth_running && ! eth_call '{"jsonrpc":"2.0","method":"net_version","id": 1}' ; do sleep 1; done
+while eth_running && [[ $(eth_call $INITIAL_TX_DATA) == "not ready" ]] ; do sleep 1; done
+kill $spinner_pid
 
 if ! eth_running ; then
   >&2 echo "Failed to start Ethereum Node, exiting"
   exit 1
-elif ! eth_call $INITIAL_TX_DATA ; then
-  >&2 echo "Could not communicate with Ethereum Node, returned error ${?}"
-  exit 2
 else
   echo -e "\e[32mGeth up and running!\e[0m"
-  fg %1
+  fg %2
   exit 0
 fi
 
