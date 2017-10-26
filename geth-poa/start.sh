@@ -72,7 +72,7 @@ if ! eth_running ; then
   RESULT=1
 else
   echo -e "\e[32mGeth up and running!\e[0m"
-  fg %2
+  fg %1
   RESULT=0
 fi
 
