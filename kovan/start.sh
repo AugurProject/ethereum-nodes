@@ -3,6 +3,7 @@ docker run --name ethereum -d -ti --rm \
   -v /root/.local:/root/.local \
   parity/parity:v1.8.0 \
     --chain kovan \
+    --public-node \
     --ui-hosts kovan.augur.net,localhost \
     --ui-interface all \
     --ws-interface all \
