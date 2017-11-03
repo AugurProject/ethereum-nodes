@@ -8,4 +8,4 @@ docker run  -ti -p 8545:8545 -p 8546:8546 -p 30303:30303 -p 30303:30303/udp \
     --ws-origins all \
     --jsonrpc-interface all \
     --jsonrpc-apis web3,eth,net,personal \
-    --jsonrpc-cors *
+    --jsonrpc-cors "*"
