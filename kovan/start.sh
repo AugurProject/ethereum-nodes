@@ -7,8 +7,8 @@ docker run --name ethereum -d -ti --rm \
     --ui-hosts kovan.augur.net,localhost \
     --ui-interface all \
     --ws-interface all \
-    --ws-apis web3,eth,net,personal \
+    --ws-apis web3,eth,net,personal,parity \
     --ws-origins all \
     --jsonrpc-interface all \
-    --jsonrpc-apis web3,eth,net,personal \
+    --jsonrpc-apis web3,eth,net,personal,parity \
     --jsonrpc-cors "*"
