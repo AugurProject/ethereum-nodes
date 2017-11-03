@@ -1,4 +1,4 @@
-docker run  -ti -p 8545:8545 -p 8546:8546 -p 30303:30303 -p 30303:30303/udp \
+docker run  -d -ti -p 8545:8545 -p 8546:8546 -p 30303:30303 -p 30303:30303/udp \
   parity/parity:v1.8.0 \
     --chain kovan \
     --ui-hosts kovan.augur.net,localhost \
