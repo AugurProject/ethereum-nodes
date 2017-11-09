@@ -7,4 +7,4 @@ KEYS=$(paste -sd, testnet-keys.txt)
 # Uses hardcoded values per network-id if missing
 # KEYS is a comma-separated list of 6 private keys
 
-docker run -t --net host -e ETHEREUM_PRIVATE_KEYS=$KEYS -e ETHEREUM_NODE_HOST=127.0.0.1 augur/spam-villa
+docker run -t -e ETHEREUM_PRIVATE_KEYS=$KEYS -e ETHEREUM_NODE_HOST=127.0.0.1 augur/spam-villa
