@@ -1,0 +1,10 @@
+version: "3"
+services:
+  spam-villa:
+    build:
+      context: ./
+    environment:
+      - ETHEREUM_NODE_HOST=${ETHEREUM_NODE_HOST}
+    env_file:
+      - ./testnet-keys.env
+
