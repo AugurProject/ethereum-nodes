@@ -1,0 +1,8 @@
+ethereum==2.0.4
+ethereum-abi-utils==0.4.0
+ethereum-utils==0.4.0
+pysha3==1.0.2
+ecdsa==0.13
+web3==3.11.1
+py-solc==1.0.1
+rlp==0.5.1
