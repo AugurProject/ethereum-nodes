@@ -27,7 +27,7 @@ RPC_INFO = {'host': ETHEREUM_NODE_HOST, 'port': ETHEREUM_NODE_PORT}
 web3 = Web3(KeepAliveRPCProvider(**RPC_INFO))
 
 THROW_CONTRACTS={
-    3: '0x904e3e97c34a96250c5341a7b005797277677f9f', # ropsten
+    3: '0x675828c833a33c6f808adcc6e08e397c8da855ac', # ropsten
     4: '0xffc4700dc5ac0639525ab50ab0a84ac125599f33', # rinkeby
 }
 
