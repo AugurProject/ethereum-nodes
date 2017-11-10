@@ -1,0 +1,56 @@
+{
+  "bootnodes": {
+    "Rockaway Bootnode 1": {
+      "files": {
+        "nodekey": "bootnode.key"
+      }
+    }
+  },
+  "sealers": {
+    "Rockaway Sealer 1": {
+      "unlock": "sealer 1"
+    },
+    "Rockaway Sealer 2": {
+      "unlock": "sealer 2"
+    }, 
+    "Rockaway Sealer 3": {
+      "unlock": "sealer 3"
+    }
+  },
+  "accounts": {
+    "sealer 1": {
+      "files": {
+        "password": "passwords/e3b5b8576a10356f42c865e1a99cdf78e90fef23.txt",
+        "key": "keystore/UTC--2017-11-04T00-06-54.236275853Z--e3b5b8576a10356f42c865e1a99cdf78e90fef23"
+      },
+      "address": "e3b5b8576a10356f42c865e1a99cdf78e90fef23",
+      "prefund": true
+    },
+    "sealer 2": {
+      "files": {
+        "password": "passwords/397bafd3de7662027689bca193ffc6ad68ff9316.txt",
+        "key": "UTC--2017-11-04T00-07-03.829975414Z--397bafd3de7662027689bca193ffc6ad68ff9316"
+      },
+      "address": "397bafd3de7662027689bca193ffc6ad68ff9316",
+      "prefund": true
+    },
+    "sealer 3": {
+      "files": {
+        "password": "passwords/45fe5396232c23f032d23c8d954df12561c80bd9.txt",
+        "key": "UTC--2017-11-06T23-00-27.383457080Z--45fe5396232c23f032d23c8d954df12561c80bd9"
+      },
+      "address": "45fe5396232c23f032d23c8d954df12561c80bd9",
+      "prefund": true
+    },
+    "publisher": {
+      "files": {
+        "password": "passwords/19ee5fe99219d0b3e3e79b4688dc75a3d5d0982f.txt",
+        "key": "UTC--2017-11-06T23-10-41.004675460Z--19ee5fe99219d0b3e3e79b4688dc75a3d5d0982f"
+      },
+      "address": "19ee5fe99219d0b3e3e79b4688dc75a3d5d0982f",
+      "prefund": true
+    }
+  }
+
+}
+
