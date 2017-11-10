@@ -9,6 +9,8 @@ from time import sleep
 TX_BASE_GAS_PRICE = os.environ.get('TX_BASE_GAS_PRICE', 1 * 10 ** 9)
 TX_MIN_PENDING_COUNT = os.environ.get('TX_MIN_PENDING_COUNT', 6)
 
+ETHEREUM_TARGET_BLOCK_GAS_LIMIT = os.environ.get('ETHEREUM_TARGET_BLOCK_GAS_LIMIT', 6700000)
+
 # 6 hard coded gas sizes
 TX_GAS_RATIO_AND_PRICE = [
     [0.95, TX_BASE_GAS_PRICE + 5],
@@ -25,7 +27,8 @@ RPC_INFO = {'host': ETHEREUM_NODE_HOST, 'port': ETHEREUM_NODE_PORT}
 web3 = Web3(KeepAliveRPCProvider(**RPC_INFO))
 
 THROW_CONTRACTS={
-    4:'0xffc4700dc5ac0639525ab50ab0a84ac125599f33', # rinkeby
+    3: '0x904e3e97c34a96250c5341a7b005797277677f9f', # ropsten
+    4: '0xffc4700dc5ac0639525ab50ab0a84ac125599f33', # rinkeby
 }
 
 CONTRACT_THROW_ADDRESS = os.environ.get('ETHEREUM_THROW_CONTRACT', THROW_CONTRACTS[web3.admin.nodeInfo['protocols']['eth']['network']])
@@ -42,11 +45,11 @@ def get_pending_tx_counts(web3):
         in web3._requestManager.request_blocking("txpool_inspect", [])["pending"].items()
     }
 
+def get_block_gas_limit(web3):
+    return web3.eth.getBlock('latest').gasLimit
 
-def update_block_gas_limits(web3, accountHolders):
-    block_gas_limit = web3.eth.getBlock('latest').gasLimit
+def update_block_gas_limits(block_gas_limit, accountHolders):
     [accountHolder.update_block_gas_limit(block_gas_limit) for accountHolder in accountHolders]
-
 
 class AccountHolder():
     def __init__(self, web3, private_key, gas_limit_percentage, gas_price):
@@ -96,17 +99,19 @@ print("\n".join([account_holder.address for account_holder in account_holders]))
 if __name__ == "__main__":
     while True:
         pending_tx_counts = get_pending_tx_counts(web3)
-        update_block_gas_limits(web3, account_holders)
-        for account_holder in account_holders:
-            if account_holder.address in pending_tx_counts:
-                tx_count, highest_nonce = pending_tx_counts[account_holder.address]
-                next_nonce = highest_nonce + 1
-            else:
-                tx_count = 0
-                next_nonce = web3.eth.getTransactionCount(account_holder.address)
+        block_gas_limit = get_block_gas_limit(web3)
+        if block_gas_limit < ETHEREUM_TARGET_BLOCK_GAS_LIMIT:
+            update_block_gas_limits(block_gas_limit, account_holders)
+            for account_holder in account_holders:
+                if account_holder.address in pending_tx_counts:
+                    tx_count, highest_nonce = pending_tx_counts[account_holder.address]
+                    next_nonce = highest_nonce + 1
+                else:
+                    tx_count = 0
+                    next_nonce = web3.eth.getTransactionCount(account_holder.address)
 
-            if tx_count < TX_MIN_PENDING_COUNT:
-                [print("%s sent TX: %s" % (account_holder.address, tx_hash))
-                 for tx_hash in account_holder.fill_pending_queue(tx_count, next_nonce)]
+                if tx_count < TX_MIN_PENDING_COUNT:
+                    [print("%s sent TX: %s" % (account_holder.address, tx_hash))
+                     for tx_hash in account_holder.fill_pending_queue(tx_count, next_nonce)]
 
-            sleep(1)
+        sleep(1)
