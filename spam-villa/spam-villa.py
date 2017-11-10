@@ -6,8 +6,8 @@ from web3 import Web3, KeepAliveRPCProvider
 from ethereum.utils import coerce_addr_to_hex, privtoaddr
 from time import sleep
 
-TX_BASE_GAS_PRICE = os.environ.get('TX_BASE_GAS_PRICE', 1 * 10 ** 9)
-TX_MIN_PENDING_COUNT = os.environ.get('TX_MIN_PENDING_COUNT', 6)
+TX_BASE_GAS_PRICE = int(os.environ.get('TX_BASE_GAS_PRICE', 1 * 10 ** 9))
+TX_MIN_PENDING_COUNT = int(os.environ.get('TX_MIN_PENDING_COUNT', 6))
 
 ETHEREUM_TARGET_BLOCK_GAS_LIMIT = os.environ.get('ETHEREUM_TARGET_BLOCK_GAS_LIMIT', 6700000)
 
