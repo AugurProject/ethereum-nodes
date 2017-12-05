@@ -12,7 +12,7 @@ COPY aura-config.toml /parity/aura-config.toml
 COPY dev-key.json /parity/keys/InstantSealChain/dev-key.json
 COPY instant-seal-chain-spec.json /parity/instant-seal-chain-spec.json
 COPY instant-seal-config.toml /parity/instant-seal-config.toml
-COPY ./common_start.sh
+COPY ./common_start.sh /common_start.sh
 COPY start.sh /start.sh
 RUN echo "" > /parity/password
 RUN chmod +x /start.sh
