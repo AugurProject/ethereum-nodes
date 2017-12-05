@@ -9,7 +9,7 @@ source ./common_start.sh
 
 node_start() {
   # launch parity in the background
-  /parity/parity --config /parity/instant-seal-config.toml --gasprice 1 &
+  /parity/parity --config /parity/aura-config.toml --gasprice 1 &
   NODE_PID=$!
 }
 

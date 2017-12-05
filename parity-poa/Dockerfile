@@ -1,4 +1,4 @@
-FROM parity/parity:v1.8.0
+FROM parity/parity:v1.8.3
 
 # install all dependencies
 RUN apt-get update \
@@ -6,9 +6,9 @@ RUN apt-get update \
 	&& rm -rf /var/lib/apt/lists/*
 
 WORKDIR /
-COPY dev-key.json /parity/keys/InstantSealChain/dev-key.json
-COPY instant-seal-chain-spec.json /parity/instant-seal-chain-spec.json
-COPY instant-seal-config.toml /parity/instant-seal-config.toml
+COPY dev-key.json /parity/keys/AuraChain/dev-key.json
+COPY aura-chain-spec.json /parity/aura-chain-spec.json
+COPY aura-config.toml /parity/aura-config.toml
 COPY ./common_start.sh /common_start.sh
 COPY start.sh /start.sh
 RUN echo "" > /parity/password
