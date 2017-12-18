@@ -12,6 +12,7 @@ source ./common_start.sh
 node_start() {
   # geth is dumb and won't let us run it in the background, and nohup redirects to file when run in a script
   nohup geth \
+    --networkId 12346
     --datadir "${ROOT}/chain" \
     --keystore "${ROOT}/keys" \
     --password "${ROOT}/password.txt" \
