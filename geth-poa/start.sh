@@ -18,8 +18,8 @@ node_start() {
     --password "${ROOT}/password.txt" \
     --unlock "${UNLOCK_ACCOUNT}" \
     --verbosity 2 --mine \
-    --ws --wsapi eth,net,web3,personal --wsaddr 0.0.0.0 --wsport $WSPORT --wsorigins '*' \
-    --rpc --rpcapi eth,net,web3,personal,miner --rpcaddr 0.0.0.0 --rpcport $RPCPORT --rpccorsdomain '*' \
+    --ws --wsapi eth,net,web3,personal,txpool --wsaddr 0.0.0.0 --wsport $WSPORT --wsorigins '*' \
+    --rpc --rpcapi eth,net,web3,personal,miner,txpool --rpcaddr 0.0.0.0 --rpcport $RPCPORT --rpccorsdomain '*' \
     --targetgaslimit 6500000 < /dev/null > $ROOT/geth.log 2>&1 &
   NODE_PID=$!
 
