@@ -39,6 +39,13 @@
         "0x0000000000000000000000000000000000000002": { "balance": "1", "builtin": { "name": "sha256", "pricing": { "linear": { "base": 60, "word": 12 } } } },
         "0x0000000000000000000000000000000000000003": { "balance": "1", "builtin": { "name": "ripemd160", "pricing": { "linear": { "base": 600, "word": 120 } } } },
         "0x0000000000000000000000000000000000000004": { "balance": "1", "builtin": { "name": "identity", "pricing": { "linear": { "base": 15, "word": 3 } } } },
-        "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb": { "balance": "0xffffffffffffffffffffffffffffffff"}
+        "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb": { "balance": "0xffffffffffffffffffffffffffffffff"},
+        "0xbd355a7e5a7adb23b51f54027e624bfe0e238df6": { "balance": "0xffffffffffffffffffffffffffffffff"},
+        "0xe4ec477bc4abd2b18225bb8cba14bf57867f082b": { "balance": "0xffffffffffffffffffffffffffffffff"},
+        "0x40075b21ee1fc506207ac45c006d68114dae9967": { "balance": "0xffffffffffffffffffffffffffffffff"},
+        "0xd1a8d03498407db8299bc912ffc0196564fe91e9": { "balance": "0xffffffffffffffffffffffffffffffff"},
+        "0x5eb11f4561da21e9070b8f664fc70aec62ec29d5": { "balance": "0xffffffffffffffffffffffffffffffff"},
+        "0x53c3d9be61c8375b34970801c5bd4d1a87860343": { "balance": "0xffffffffffffffffffffffffffffffff"},
+        "0x9d4c6d4b84cd046381923c9bc136d6ff1fe292d9": { "balance": "0xffffffffffffffffffffffffffffffff"}
     }
 }
