@@ -19,7 +19,7 @@ node_start() {
     --unlock "${UNLOCK_ACCOUNT}" \
     --verbosity ${GETH_VERBOSITY:-2} --mine \
     --ws --wsapi eth,net,web3,personal,txpool --wsaddr 0.0.0.0 --wsport $WSPORT --wsorigins '*' \
-    --rpc --rpcapi eth,net,web3,personal,miner,txpool --rpcaddr 0.0.0.0 --rpcport $RPCPORT --rpccorsdomain '*' \
+    --rpc --rpcapi eth,net,web3,personal,miner,txpool --rpcaddr 0.0.0.0 --rpcport $RPCPORT --rpccorsdomain '*' --rpcvhosts '*' \
     --targetgaslimit 6500000 < /dev/null > $ROOT/geth.log 2>&1 &
   NODE_PID=$!
 
