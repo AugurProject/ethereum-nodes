@@ -27,4 +27,22 @@ node_start() {
   TAIL_PID=$!
 }
 
+setup_chain_dir() {
+  # to enable volume mounts to persist data, we need to take some specific
+  # actions, detecting when one is present and new, vs present and old
+  # vs not present
+  if [ ! -d ${ROOT}/chain ]; then
+    echo "${ROOT}/chain not mounted, transactions will be ephemeral"
+    mv ${ROOT}/chain-template ${ROOT}/chain
+  else
+    # Chain dir exists
+    if [ -d /geth/chain/geth/chaindata ]; then
+      echo "${ROOT}/chain-template mounted and has prior blockchain state, restored"
+    else
+      echo "${ROOT}/chain-template mounted, but uninitialized. Copying chaindata template"
+      mv ${ROOT}/chain-template/* ${ROOT}/chain
+    fi
+  fi
+}
+
 start
