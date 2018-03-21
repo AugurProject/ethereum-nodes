@@ -52,6 +52,7 @@ node_detect_ready() {
 }
 
 start() {
+  setup_chain_dir
   node_start
 
   node_detect_ready &
