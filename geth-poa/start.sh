@@ -32,7 +32,7 @@ setup_chain_dir() {
   # actions, detecting when one is present and new, vs present and old
   # vs not present
   if [ ! -d ${ROOT}/chain ]; then
-    echo "${ROOT}/chain mounted, transactions will be ephemeral"
+    echo "${ROOT}/chain not mounted, transactions will be ephemeral"
     mv ${ROOT}/chain-template ${ROOT}/chain
   else
     # Chain dir exists
