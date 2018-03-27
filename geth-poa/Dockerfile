@@ -7,7 +7,6 @@ RUN apk update \
 COPY genesis.json /geth/genesis.json
 COPY password.txt /geth/password.txt
 ADD keys /geth/keys
-RUN geth --datadir /geth/chain-template --keystore /geth/keys init /geth/genesis.json
 
 WORKDIR /
 COPY ./common_start.sh /common_start.sh
