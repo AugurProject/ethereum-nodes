@@ -11,6 +11,7 @@ source ./common_start.sh
 
 node_start() {
   # geth is dumb and won't let us run it in the background, and nohup redirects to file when run in a script
+
   nohup geth \
     --networkid "$(cat "$ROOT/networkid")" \
     --datadir "${ROOT}/chain" \
@@ -27,26 +28,33 @@ node_start() {
   TAIL_PID=$!
 }
 
+setup_chain_template() {
+  if [ ! -d "${ROOT}/chain-template" ]; then
+    echo "Setting up Genesis with Network ID: ${NETWORK_ID:-12346}"
+    sed -i'' -r "s/NETWORK_ID/${NETWORK_ID:-12346}/" ${ROOT}/genesis.json
+    geth --datadir "${ROOT}/chain-template" --keystore "${ROOT}/keys" init "${ROOT}/genesis.json"
+
+    echo ${NETWORK_ID:-12346} > "${ROOT}/networkid"
+  fi
+}
+
 setup_chain_dir() {
   # to enable volume mounts to persist data, we need to take some specific
   # actions, detecting when one is present and new, vs present and old
   # vs not present
   if [ ! -d ${ROOT}/chain ]; then
-    if [ ! -d "${ROOT}/chain-template" ]; then
-      echo "Setting up Genesis with Network ID: ${NETWORK_ID:-12346}"
-      sed -i'' -r "s/NETWORK_ID/${NETWORK_ID:-12346}/" ${ROOT}/genesis.json
-      geth --datadir "${ROOT}/chain-template" --keystore "${ROOT}/keys" init "${ROOT}/genesis.json"
-
-      echo ${NETWORK_ID:-12346} > "${ROOT}/networkid"
-    fi
-
+    setup_chain_template
     echo "${ROOT}/chain not mounted, transactions will be ephemeral"
     mv ${ROOT}/chain-template ${ROOT}/chain
   else
     # Chain dir exists
     if [ -d ${ROOT}/chain/geth/chaindata ]; then
+      if [ ! -f "${ROOT}/networkid" ]; then
+        echo ${NETWORK_ID:-12346} > "${ROOT}/networkid"
+      fi
       echo "${ROOT}/chain-template mounted and has prior blockchain state, restored"
     else
+      setup_chain_template
       echo "${ROOT}/chain-template mounted, but uninitialized. Copying chaindata template"
       mv ${ROOT}/chain-template/* ${ROOT}/chain
     fi
