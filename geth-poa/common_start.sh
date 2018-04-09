@@ -1,7 +1,6 @@
 #!/bin/bash
 
 declare -i NODE_PID
-declare -i TAIL_PID
 
 read -r -d INITIAL_TX_DATA << --EOF
 {
@@ -20,7 +19,7 @@ read -r -d INITIAL_TX_DATA << --EOF
 
 
 node_cleanup() {
-  kill $TAIL_PID $NODE_PID > /dev/null 2>&1
+  kill $NODE_PID > /dev/null 2>&1
 }
 
 node_wait() {
