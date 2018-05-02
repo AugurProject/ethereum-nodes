@@ -1,4 +1,4 @@
-FROM parity/parity:v1.8.0
+FROM parity/parity:v1.9.7
 
 # install all dependencies
 RUN apt-get update \

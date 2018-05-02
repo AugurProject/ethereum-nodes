@@ -9,6 +9,8 @@ base_path = "/parity"
 db_path = "/parity/chains"
 # Your encrypted private keys will be stored in /parity/keys.
 keys_path = "/parity/keys"
+# Parity will not save local transaction queue to disk.
+no_persistent_txqueue = true
 
 [account]
 # From: [0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb] you'll be able to send tranasactions without password.
@@ -26,7 +28,7 @@ reserved_only = true
 #  JSON-RPC will be listening for connections on IP 0.0.0.0.
 interface = "all"
 # Allows Cross-Origin Requests from domain '*'.
-cors = "*"
+cors = ["*"]
 # Only selected APIs will be exposed over this interface.
 apis = ["all"]
 # Allow connections only using specified addresses.
@@ -52,7 +54,7 @@ disable = true
 
 [ipfs]
 # You won't be able to hash-query blockchain data.
-disable = true
+enable = false
 
 [dapps]
 # You won't be able to access any web Dapps.
@@ -67,8 +69,6 @@ gas_floor_target = "6500000"
 gas_cap = "6500000"
 # Parity will reject transactions above 6500000 gas.
 tx_gas_limit = "6500000"
-# Parity will not save local transaction queue to disk.
-no_persistent_txqueue = true
 
 [footprint]
 # Significant speed up but unclean exit is unrecoverable (disables DB WAL).
