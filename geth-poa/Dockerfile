@@ -1,7 +1,7 @@
 FROM ethereum/client-go:v1.8.2
 
 RUN apk update \
-    && apk add bash curl
+    && apk add bash curl coreutils
 
 
 COPY genesis.json /geth/genesis.json
