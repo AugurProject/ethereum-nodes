@@ -3,7 +3,7 @@
 RPCPORT=8545
 WSPORT=8546
 if [[ "${ROOT}" == "" ]] ; then ROOT="/geth" ; fi
-[[ "${UNLOCK_ACCOUNT}" != "" ]] || UNLOCK_ACCOUNT="0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb"
+[[ "${UNLOCK_ACCOUNT}" != "" ]] || UNLOCK_ACCOUNT="0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb,0x9d4c6d4b84cd046381923c9bc136d6ff1fe292d9,0xbd355a7e5a7adb23b51f54027e624bfe0e238df6"
 
 ROOT=$(readlink -f $ROOT)
 
