@@ -63,12 +63,12 @@ disable = true
 [mining]
 engine_signer = "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb"
 min_gas_price = 1
-# Targeting 6500000 gas per block when sealing a new block.
-gas_floor_target = "6500000"
-# Gas limit will be raised at most by 6500000 gas.
-gas_cap = "6500000"
-# Parity will reject transactions above 6500000 gas.
-tx_gas_limit = "6500000"
+# Targeting 7000000 gas per block when sealing a new block.
+gas_floor_target = "7000000"
+# Gas limit will be raised at most by 7000000 gas.
+gas_cap = "7000000"
+# Parity will reject transactions above 7000000 gas.
+tx_gas_limit = "7000000"
 
 [footprint]
 # Significant speed up but unclean exit is unrecoverable (disables DB WAL).
