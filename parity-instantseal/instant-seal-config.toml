@@ -63,12 +63,12 @@ disable = true
 [mining]
 reseal_min_period = 0
 min_gas_price = 1
-# Targeting 7000000 gas per block when sealing a new block.
-gas_floor_target = "7000000"
-# Gas limit will be raised at most by 7000000 gas.
-gas_cap = "7000000"
-# Parity will reject transactions above 7000000 gas.
-tx_gas_limit = "7000000"
+# Targeting 7500000 gas per block when sealing a new block.
+gas_floor_target = "7500000"
+# Gas limit will be raised at most by 7500000 gas.
+gas_cap = "7500000"
+# Parity will reject transactions above 7500000 gas.
+tx_gas_limit = "7500000"
 
 [footprint]
 # Significant speed up but unclean exit is unrecoverable (disables DB WAL).
