@@ -1,14 +1,14 @@
 [parity]
 # Local Development Chain
-chain = "/parity/instant-seal-chain-spec.json"
+chain = "/home/parity/instant-seal-chain-spec.json"
 # Forces Parity to run even if there are known issues regarding consensus. Not recommended.
 no_consensus = true
 # Blockchain and settings will be stored in /parity.
-base_path = "/parity"
+base_path = "/home/parity"
 # Parity databases will be stored in /parity/chains.
-db_path = "/parity/chains"
+db_path = "/home/parity/chains"
 # Your encrypted private keys will be stored in /parity/keys.
-keys_path = "/parity/keys"
+keys_path = "/home/parity/keys"
 # Parity will not save local transaction queue to disk.
 no_persistent_txqueue = true
 
@@ -16,7 +16,7 @@ no_persistent_txqueue = true
 # From: [0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb] you'll be able to send tranasactions without password.
 unlock = ["0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb"]
 # File at /parity/password should contain passwords to unlock your accounts. One password per line.
-password = ["/parity/password"]
+password = ["/home/parity/password"]
 
 [network]
 # Enable or disable new peers discovery.
@@ -55,10 +55,6 @@ disable = true
 [ipfs]
 # You won't be able to hash-query blockchain data.
 enable = false
-
-[dapps]
-# You won't be able to access any web Dapps.
-disable = true
 
 [mining]
 reseal_min_period = 0
