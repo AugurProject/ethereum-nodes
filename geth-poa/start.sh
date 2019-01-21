@@ -31,13 +31,15 @@ node_start() {
 
 setup_chain_template() {
   if [ ! -d "${ROOT}/chain-template" ]; then
-    echo "Setting up Genesis with Network ID: ${NETWORK_ID:-12346}"
-    echo "Setting up Genesis with Period Time: ${PERIOD_TIME:-1}"
-    sed -i'' -r "s/NETWORK_ID/${NETWORK_ID:-12346}/" ${ROOT}/genesis.json
-    sed -i'' -r "s/PERIOD_TIME/${PERIOD_TIME:-1}/" ${ROOT}/genesis.json
+    PERIOD_TIME="${PERIOD_TIME:-0}"
+    NETWORK_ID="${NETWORK_ID:-12346}"
+    echo "Setting up Genesis with Network ID: $NETWORK_ID"
+    echo "Setting up Genesis with Period Time: $PERIOD_TIME"
+    sed -i -r "s/NETWORK_ID/$NETWORK_ID/" ${ROOT}/genesis.json
+    sed -i -r "s/PERIOD_TIME/$PERIOD_TIME/" ${ROOT}/genesis.json
     geth --nodiscover --datadir "${ROOT}/chain-template" --keystore "${ROOT}/keys" init "${ROOT}/genesis.json"
 
-    echo ${NETWORK_ID:-12346} > "${ROOT}/networkid"
+    echo $NETWORK_ID > "${ROOT}/networkid"
   fi
 }
 
