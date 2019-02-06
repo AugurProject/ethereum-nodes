@@ -7,7 +7,7 @@ source ./common_start.sh
 
 node_start() {
   # launch parity in the background
-  /home/parity/bin/parity --config /home/parity/aura-config.toml &
+  /bin/parity --config /home/parity/aura-config.toml &
   NODE_PID=$!
 }
 
