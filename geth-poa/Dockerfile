@@ -1,4 +1,4 @@
-FROM ethereum/client-go:v1.8.21
+FROM ethereum/client-go:v1.8.22
 
 RUN apk update \
     && apk add bash curl coreutils
